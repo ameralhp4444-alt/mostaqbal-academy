@@ -146,5 +146,120 @@
       <button class="primary wide" onclick="closeLesson()">ابدأ المحاضرة</button>
     </div>
   </div>
+<!-- تسجيل دخول الطلاب -->
+<div id="loginBox" style="padding:20px;max-width:450px;margin:30px auto;text-align:center;">
+  <h2>تسجيل دخول الطالب</h2>
 
+  <input
+    id="phoneNumber"
+    type="tel"
+    placeholder="+201xxxxxxxxx"
+    style="width:100%;padding:12px;margin:10px 0;"
+  >
+
+  <div id="recaptcha-container"></div>
+
+  <button id="sendCode"
+    style="padding:12px 25px;margin:10px;">
+    إرسال كود SMS
+  </button>
+
+  <input
+    id="verificationCode"
+    type="text"
+    placeholder="اكتب كود التحقق"
+    style="width:100%;padding:12px;margin:10px 0;"
+  >
+
+  <button id="verifyCode"
+    style="padding:12px 25px;">
+    تسجيل الدخول
+  </button>
+
+  <p id="loginMessage"></p>
+</div>
+
+<script type="module">
+  import { initializeApp }
+    from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+  import {
+    getAuth,
+    RecaptchaVerifier,
+    signInWithPhoneNumber
+  } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyDtyyxxeUvmjon7tivpS1Kga2GdXlnCaQ4",
+    authDomain: "mostaqbal-academy-5f51b.firebaseapp.com",
+    databaseURL: "https://mostaqbal-academy-5f51b-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "mostaqbal-academy-5f51b",
+    storageBucket: "mostaqbal-academy-5f51b.firebasestorage.app",
+    messagingSenderId: "398450175799",
+    appId: "1:398450175799:web:83a302dac12387bc3234b2"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+</script>
+    authDomain: "mostaqbal-academy-5f51b.firebaseapp.com",
+    projectId: "mostaqbal-academy-5f51b",
+    storageBucket: "mostaqbal-academy-5f51b.firebasestorage.app",
+    messagingSenderId: "ضع_MESSAGING_SENDER_ID_هنا",
+    appId: "ضع_APP_ID_هنا"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  window.recaptchaVerifier = new RecaptchaVerifier(
+    auth,
+    "recaptcha-container",
+    {}
+  );
+
+  let confirmationResult;
+
+  document.getElementById("sendCode").onclick = async () => {
+    const phone = document.getElementById("phoneNumber").value.trim();
+    const message = document.getElementById("loginMessage");
+
+    try {
+      confirmationResult = await signInWithPhoneNumber(
+        auth,
+        phone,
+        window.recaptchaVerifier
+      );
+
+      message.textContent = "تم إرسال كود التحقق إلى هاتفك ✅";
+    } catch (error) {
+      message.textContent = "حدث خطأ: " + error.message;
+    }
+  };
+
+  document.getElementById("verifyCode").onclick = async () => {
+    const code = document.getElementById("verificationCode").value.trim();
+    const message = document.getElementById("loginMessage");
+
+    if (!confirmationResult) {
+      message.textContent = "اضغط إرسال كود SMS أولًا.";
+      return;
+    }
+
+    try {
+      await confirmationResult.confirm(code);
+      message.textContent = "تم تسجيل الدخول بنجاح ✅";
+    } catch (error) {
+      message.textContent = "الكود غير صحيح أو انتهت صلاحيته.";
+    }
+  };
+</script>
   <script src="script.js"></script>
