@@ -289,12 +289,17 @@ verifyButton.addEventListener("click", async () => {
   <p>تم تسجيل دخولك بنجاح</p>
 
   <div style="margin-top:25px;">
-    <button>📚 الكورسات</button>
+    <button id="coursesButton">📚 الكورسات</button>
     <button>📝 الاختبارات</button>
     <button>📊 الدرجات</button>
     <button>👤 حساب الطالب</button>
     <button>🚪 تسجيل الخروج</button>
   </div>
 </div>
+  <script>
+document.getElementById("coursesButton").onclick = function() {
+  alert("قريبًا سيتم إضافة الكورسات 📚");
+};
+  </script>
 </body>
 </html>
