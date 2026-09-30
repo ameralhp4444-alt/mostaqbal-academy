@@ -297,9 +297,27 @@ verifyButton.addEventListener("click", async () => {
   </div>
 </div>
   <script>
+<script>
 document.getElementById("coursesButton").onclick = function() {
-  alert("قريبًا سيتم إضافة الكورسات 📚");
+  document.getElementById("studentPage").style.display = "none";
+
+  document.body.insertAdjacentHTML("beforeend", 
+    <div id="coursesPage" style="padding:30px;text-align:center;">
+      <h1>📚 الكورسات</h1>
+
+      <div style="border:1px solid #ddd;padding:20px;margin:20px auto;max-width:500px;border-radius:15px;">
+        <h2>🇬🇧 English Mastery</h2>
+        <p>كورس اللغة الإنجليزية</p>
+        <button onclick="alert('سيتم فتح المحاضرات قريبًا 📖')">
+          🎓 دخول الكورس
+        </button>
+      </div>
+
+      <button onclick="location.reload()">
+        🔙 العودة
+      </button>
+    </div>
+  );
 };
-  </script>
-</body>
+</script>
 </html>
