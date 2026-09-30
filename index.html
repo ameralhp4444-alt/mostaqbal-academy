@@ -274,7 +274,7 @@ verifyButton.addEventListener("click", async () => {
 
   try {
     await confirmationResult.confirm(code);
-    showMessage("تم تسجيل الدخول بنجاح ✅");
+    showMessage("تم تسجيل الدخول بنجاح ✅");document.getElementById("studentPage").style.display = "block";
   } catch (error) {
     console.error(error);
     showMessage("كود التحقق غير صحيح أو حدث خطأ: " + (error.message || error));
