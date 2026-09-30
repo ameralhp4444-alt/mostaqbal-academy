@@ -263,14 +263,17 @@
       message.textContent = "اكتب كود التحقق أولًا.";
       return;
     }
-
-    try {
-      await confirmationResult.confirm(code);
-      message.textContent = "تم تسجيل الدخول بنجاح ✅";
-    } catch (error) {
-      console.error(error);
-      message.textContent = "الكود غير صحيح أو انتهت صلاحيته.";
-    }
-  };
+try {
+    const result = await confirmationResult.confirm(code);
+    message.textContent = "تم تسجيل الدخول بنجاح ✅";
+  } catch (error) {
+    console.error(error);
+    message.textContent = "كود التحقق غير صحيح أو حدث خطأ: " + error.message;
+  }
+});
 </script>
+
 <script src="script.js"></script>
+
+</body>
+</html>
