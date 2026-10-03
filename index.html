@@ -1,238 +1,156 @@
-showMessage(
-                "اكتب رقم الهاتف أولاً بصيغة دولية مثل +201xxxxxxxxx"
-            );
+<section
+    class="section"
+    style="text-align:center;">
 
-            return;
-        }
+    <button
+      onclick="logout()"
+      style="
+        border:0;
+        background:#c8102e;
+        color:white;
+        padding:13px 25px;
+        border-radius:13px;
+        font-family:inherit;
+        font-weight:800;
+        cursor:pointer;
+      ">
+      تسجيل الخروج
+    </button>
 
+  </section>
 
-        if(!auth){
+</div>
 
-            showMessage(
-                "Firebase لم يعمل بشكل صحيح."
-            );
 
-            return;
-        }
+<!-- =====================================================
+     نافذة الدرس
+===================================================== -->
 
+<div
+  id="lessonModal"
+  class="modal">
 
-        sendButton.disabled = true;
+  <div class="modal-box">
 
-        showMessage(
-            "جاري إرسال كود التحقق..."
-        );
+    <button
+      class="close"
+      onclick="closeLesson()">
+      ×
+    </button>
 
+    <div class="video-placeholder">
+      ▶
+    </div>
 
-        try{
+    <h2 id="modalTitle">
+      الدرس
+    </h2>
 
-            confirmationResult =
-                await signInWithPhoneNumber(
-                    auth,
-                    phone,
-                    recaptchaVerifier
-                );
+    <p>
+      سيتم وضع فيديو الدرس هنا.
+    </p>
 
+  </div>
 
-            phoneSection.style.display =
-                "none";
+</div>
 
-            codeSection.style.display =
-                "block";
 
+<!-- =====================================================
+     Firebase
+===================================================== -->
 
-            showMessage(
-                "تم إرسال الكود إلى هاتفك ✅",
-                true
-            );
+<script type="module">
 
+  import {
+    initializeApp
+  } from
+  "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-            codeInput.focus();
 
+  import {
+    getAuth,
+    RecaptchaVerifier,
+    signInWithPhoneNumber,
+    onAuthStateChanged,
+    signOut
+  } from
+  "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-        }catch(error){
 
-            console.error(error);
+  /* نفس Firebase اللي كانت المنصة مربوطة بيه */
 
-            showMessage(
-                "حدث خطأ أثناء إرسال الكود: "
-                + error.message
-            );
+  const firebaseConfig = {
 
+    apiKey:
+      "AIzaSyDtyyxxeUvmjon7tivpS1Kga2GdXlnCAQ4",
 
-            try{
+    authDomain:
+      "mostaqbal-academy-5f51b.firebaseapp.com",
 
-                recaptchaVerifier.clear();
+    databaseURL:
+      "https://mostaqbal-academy-5f51b-default-rtdb.europe-west1.firebasedatabase.app",
 
-            }catch(e){}
+    projectId:
+      "mostaqbal-academy-5f51b",
 
+    storageBucket:
+      "mostaqbal-academy-5f51b.firebasestorage.app",
 
-            createRecaptcha();
+    messagingSenderId:
+      "398450175799",
 
+    appId:
+      "1:398450175799:web:83a302dac12387bc3234b2"
 
-        }finally{
+  };
 
-            sendButton.disabled = false;
 
-        }
+  const app =
+    initializeApp(firebaseConfig);
 
-    }
-);
 
+  const auth =
+    getAuth(app);
 
-/* =========================
-   تأكيد الكود
-========================= */
 
-verifyButton.addEventListener(
-    "click",
-    async function(){
+  /* العناصر */
 
-        const code =
-            codeInput.value.trim();
+  const loginPage =
+    document.getElementById("loginPage");
 
+  const coursesPage =
+    document.getElementById("coursesPage");
 
-        if(!confirmationResult){
+  const phoneSection =
+    document.getElementById("phoneSection");
 
-            showMessage(
-                "اطلب كود التحقق أولاً."
-            );
+  const codeSection =
+    document.getElementById("codeSection");
 
-            return;
-        }
+  const phoneInput =
+    document.getElementById("phoneInput");
 
+  const codeInput =
+    document.getElementById("codeInput");
 
-        if(!code){
+  const sendButton =
+    document.getElementById("sendButton");
 
-            showMessage(
-                "اكتب كود التحقق."
-            );
+  const verifyButton =
+    document.getElementById("verifyButton");
 
-            return;
-        }
+  const backButton =
+    document.getElementById("backButton");
 
+  const message =
+    document.getElementById("message");
 
-        verifyButton.disabled = true;
 
-        showMessage(
-            "جاري التحقق..."
-        );
+  let confirmationResult = null;
 
+  let recaptchaVerifier = null;
 
-        try{
 
-            await confirmationResult.confirm(code);
+  /* الرسائل */
 
-            showMessage(
-                "تم تسجيل الدخول بنجاح ✅",
-                true
-            );
-
-
-        }catch(error){
-
-            console.error(error);
-
-            showMessage(
-                "كود التحقق غير صحيح أو انتهت صلاحيته."
-            );
-
-        }finally{
-
-            verifyButton.disabled = false;
-
-        }
-
-    }
-);
-
-
-/* =========================
-   تغيير الرقم
-========================= */
-
-backButton.addEventListener(
-    "click",
-    function(){
-
-        confirmationResult = null;
-
-        codeInput.value = "";
-
-        codeSection.style.display =
-            "none";
-
-        phoneSection.style.display =
-            "block";
-
-        showMessage(
-            "يمكنك إدخال رقم هاتف آخر."
-        );
-
-        try{
-
-            recaptchaVerifier.clear();
-
-        }catch(e){}
-
-        createRecaptcha();
-
-    }
-);
-
-
-/* =========================
-   مراقبة حالة تسجيل الدخول
-========================= */
-
-onAuthStateChanged(
-    auth,
-    function(user){
-
-        if(user){
-
-            loginPage.style.display =
-                "none";
-
-            studentPage.style.display =
-                "block";
-
-        }else{
-
-            loginPage.style.display =
-                "flex";
-
-            studentPage.style.display =
-                "none";
-
-        }
-
-    }
-);
-
-
-/* =========================
-   تسجيل الخروج
-========================= */
-
-logoutButton.addEventListener(
-    "click",
-    async function(){
-
-        try{
-
-            await signOut(auth);
-
-            coursesPage.style.display =
-                "none";
-
-            phoneSection.style.display =
-                "block";
-
-            codeSection.style.display =
-                "none";
-
-            phoneInput.value = "";
-
-            codeInput.value = "";
-
-            confirmationResult = null;
+  function showMessage(text,
