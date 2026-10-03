@@ -1,0 +1,168 @@
+<span>
+            التقدم في الكورس
+          </span>
+
+          <span id="progressPercent">
+            0%
+          </span>
+
+        </div>
+
+        <div class="progress-bar">
+
+          <div class="progress" id="progressBar"></div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- تسجيل الخروج -->
+    <div class="logout-area">
+
+      <button class="logout-btn" onclick="logout()">
+        تسجيل الخروج
+      </button>
+
+    </div>
+
+  </main>
+
+
+  <!-- Firebase -->
+  <script type="module">
+
+    import {
+      initializeApp
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+    import {
+      getAuth,
+      onAuthStateChanged,
+      signOut
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+
+    const firebaseConfig = {
+
+      apiKey: "AIzaSyDtyyxxeUvmjon7tivpS1Kga2GdXlnCAQ4",
+
+      authDomain: "mostaqbal-academy-5f51b.firebaseapp.com",
+
+      databaseURL:
+      "https://mostaqbal-academy-5f51b-default-rtdb.europe-west1.firebasedatabase.app",
+
+      projectId:
+      "mostaqbal-academy-5f51b",
+
+      storageBucket:
+      "mostaqbal-academy-5f51b.firebasestorage.app",
+
+      messagingSenderId:
+      "398450175799",
+
+      appId:
+      "1:398450175799:web:83a302dac12387bc3234b2"
+
+    };
+
+
+    const app = initializeApp(firebaseConfig);
+
+    const auth = getAuth(app);
+
+
+    /* التأكد أن الطالب مسجل دخول */
+
+    onAuthStateChanged(auth, (user) => {
+
+      if (!user) {
+
+        window.location.href = "index.html";
+
+        return;
+
+      }
+
+
+      let phone = user.phoneNumber || "غير متوفر";
+
+
+      document.getElementById("studentPhone").textContent =
+        phone;
+
+      document.getElementById("infoPhone").textContent =
+        phone;
+
+
+      /*
+        مؤقتًا اسم الطالب = الطالب
+        وبعد كده نقدر نعمل نظام تسجيل اسم الطالب
+        ونخليه يظهر هنا تلقائيًا.
+      */
+
+      const name = "الطالب";
+
+
+      document.getElementById("studentName").textContent =
+        name;
+
+      document.getElementById("infoName").textContent =
+        name;
+
+
+      /* أول حرف في الصورة */
+
+      document.getElementById("avatar").textContent =
+        name.charAt(0);
+
+
+    });
+
+
+    /* تسجيل الخروج */
+
+    window.logout = async function () {
+
+      try {
+
+        await signOut(auth);
+
+        window.location.href = "index.html";
+
+      } catch (error) {
+
+        console.error(error);
+
+        alert("حدث خطأ أثناء تسجيل الخروج");
+
+      }
+
+    };
+
+
+    /* العودة للرئيسية */
+
+    window.goHome = function () {
+
+      window.location.href = "index.html";
+
+    };
+
+
+    /* نسبة التقدم */
+
+    const progress = 0;
+
+    document.getElementById("progressBar").style.width =
+      progress + "%";
+
+    document.getElementById("progressPercent").textContent =
+      progress + "%";
+
+  </script>
+
+</body>
+</html>
