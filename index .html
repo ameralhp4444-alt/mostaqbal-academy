@@ -1,0 +1,220 @@
+</div>
+
+
+          <div class="stat-card">
+
+            <div class="stat-icon orange">
+              ◔
+            </div>
+
+            <div>
+              <strong id="progressNumber">0%</strong>
+              <span>نسبة التقدم</span>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="section-head">
+
+          <div>
+            <h3>الدروس المتاحة</h3>
+            <p>اختر الدرس الذي تريد البدء به.</p>
+          </div>
+
+          <button class="text-btn" data-go="courses">
+            عرض الكل
+          </button>
+
+        </div>
+
+
+        <div id="homeLessons" class="lesson-grid"></div>
+
+      </section>
+
+
+      <!-- الدروس -->
+      <section id="courses" class="content-section">
+
+        <div class="page-title">
+
+          <span class="eyebrow">
+            المحتوى التعليمي
+          </span>
+
+          <h2>الدروس</h2>
+
+          <p>
+            شاهد الدرس ثم علّمه كمكتمل.
+          </p>
+
+        </div>
+
+        <div id="allLessons" class="lesson-grid"></div>
+
+      </section>
+
+
+      <!-- التقدم -->
+      <section id="progress" class="content-section">
+
+        <div class="page-title">
+
+          <span class="eyebrow">
+            متابعة المستوى
+          </span>
+
+          <h2>تقدمي الدراسي</h2>
+
+          <p>
+            تابع ما أنجزته من الدروس.
+          </p>
+
+        </div>
+
+
+        <div class="progress-card">
+
+          <div class="progress-top">
+
+            <div>
+
+              <span>إجمالي التقدم</span>
+
+              <strong id="bigProgress">
+                0%
+              </strong>
+
+            </div>
+
+
+            <div class="progress-ring" id="progressRing">
+
+              <span id="ringText">
+                0%
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="progress-bar">
+            <span id="progressBar"></span>
+          </div>
+
+
+          <p id="progressMessage">
+            ابدأ أول درس لتحصل على تقدمك الأول.
+          </p>
+
+        </div>
+
+
+        <div id="progressLessons" class="progress-list"></div>
+
+      </section>
+
+
+      <!-- الملف الشخصي -->
+      <section id="profile" class="content-section">
+
+        <div class="page-title">
+
+          <span class="eyebrow">
+            حساب الطالب
+          </span>
+
+          <h2>ملفي</h2>
+
+          <p>
+            بيانات الدخول الخاصة بك.
+          </p>
+
+        </div>
+
+
+        <div class="profile-card">
+
+          <div class="profile-avatar" id="profileAvatar">
+            ط
+          </div>
+
+          <div class="profile-data">
+
+            <label>اسم الطالب</label>
+
+            <strong id="profileName">
+              الطالب
+            </strong>
+
+
+            <label>كود الطالب</label>
+
+            <strong id="profileCode">
+              ---
+            </strong>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+
+  <!-- نافذة الدرس -->
+  <div id="lessonModal" class="modal hidden">
+
+    <div class="modal-box">
+
+      <button id="closeModal" class="close-btn">
+        ×
+      </button>
+
+
+      <div class="video-placeholder">
+
+        <div class="play-circle">
+          ▶
+        </div>
+
+        <p>
+          مكان فيديو الدرس
+        </p>
+
+        <small>
+          يمكن إضافة فيديو YouTube لاحقًا.
+        </small>
+
+      </div>
+
+
+      <h3 id="modalTitle">
+        عنوان الدرس
+      </h3>
+
+      <p id="modalDescription">
+        وصف الدرس
+      </p>
+
+
+      <button id="completeBtn" class="primary-btn">
+        ✓ تعليم الدرس كمكتمل
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <script src="script.js"></script>
+
+</body>
+</html>
