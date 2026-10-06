@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Basata | English Learning Platform</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <main class="card">
+      <section class="hero">
+        <div class="logo">B</div>
+        <h1>Basata</h1>
+        <p>English made simple. 🇬🇧</p>
+      </section>
+
+      <section class="content">
+        <div id="home" class="screen active">
+          <div class="intro">
+            <h2>ابدأ رحلتك في تعلم الإنجليزية 🇬🇧</h2>
+            <p>منصة Basata التعليمية لتعلم اللغة الإنجليزية بطريقة بسيطة ومنظمة.</p>
+            <div class="buttons">
+              <button class="primary" onclick="showScreen('signup')">إنشاء حساب جديد</button>
+              <button class="secondary" onclick="showScreen('login')">لدي حساب بالفعل — تسجيل الدخول</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="signup" class="screen">
+          <h2 class="form-title">إنشاء حساب جديد</h2>
+          <form id="signupForm">
+            <div class="grid">
+              <div class="field">
+                <label>الاسم الأول</label>
+                <input required type="text" placeholder="اكتب الاسم الأول">
+              </div>
+              <div class="field">
+                <label>الاسم الثاني</label>
+                <input required type="text" placeholder="اكتب الاسم الثاني">
+              </div>
+              <div class="field">
+                <label>الاسم الثالث</label>
+                <input type="text" placeholder="اكتب الاسم الثالث">
+              </div>
+              <div class="field">
+                <label>اسم العائلة</label>
+                <input required type="text" placeholder="اكتب اسم العائلة">
+              </div>
+              <div class="field">
+                <label>رقم الهاتف</label>
+                <input required type="tel" placeholder="01xxxxxxxxx">
+              </div>
+              <div class="field">
+                <label>الصف الدراسي</label>
+                <select required>
+                  <option value="">اختر الصف</option>
+                  <option>الصف الأول الإعدادي</option>
+                  <option>الصف الثاني الإعدادي</option>
+                  <option>الصف الثالث الإعدادي</option>
+                  <option>الصف الأول الثانوي</option>
+                  <option>الصف الثاني الثانوي</option>
+                  <option>الصف الثالث الثانوي</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>رقم الطالب</label>
+                <input required type="text" placeholder="رقم الطالب">
+              </div>
+              <div class="field">
+                <label>كلمة المرور</label>
+                <input required type="password" placeholder="كلمة المرور">
+              </div>
+              <div class="field full">
+                <label>تأكيد كلمة المرور</label>
+                <input required type="password" placeholder="أعد كتابة كلمة المرور">
+              </div>
+            </div>
+            <div class="actions">
+              <button class="primary" type="submit">إنشاء الحساب</button>
+              <button class="back" type="button" onclick="showScreen('home')">العودة</button>
+            </div>
+            <div id="signupMessage" class="message"></div>
+          </form>
+        </div>
+
+        <div id="login" class="screen">
+          <h2 class="form-title">تسجيل الدخول</h2>
+          <form id="loginForm">
+            <div class="grid">
+              <div class="field full">
+                <label>رقم الهاتف</label>
+                <input required type="tel" placeholder="01xxxxxxxxx">
+              </div>
+              <div class="field full">
+                <label>كلمة المرور</label>
+                <input required type="password" placeholder="كلمة المرور">
+              </div>
+            </div>
+            <div class="actions">
+              <button class="primary" type="submit">تسجيل الدخول</button>
+              <button class="secondary" type="button" onclick="showScreen('signup')">إنشاء حساب جديد</button>
+              <button class="back" type="button" onclick="showScreen('home')">العودة</button>
+            </div>
+            <div id="loginMessage" class="message"></div>
+          </form>
+        </div>
+
+        <div class="footer">Basata — English Learning Platform</div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
